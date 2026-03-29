@@ -15,6 +15,7 @@ import {
   DATA_DIR,
   GROUPS_DIR,
   IDLE_TIMEOUT,
+  OBSIDIAN_API_KEY,
   TIMEZONE,
 } from './config.js';
 import { resolveGroupFolderPath, resolveGroupIpcPath } from './group-folder.js';
@@ -260,6 +261,12 @@ function buildContainerArgs(
     args.push('-e', 'ANTHROPIC_API_KEY=placeholder');
   } else {
     args.push('-e', 'CLAUDE_CODE_OAUTH_TOKEN=placeholder');
+  }
+
+  // Obsidian MCP server — pass API key and host URL if configured
+  if (OBSIDIAN_API_KEY) {
+    args.push('-e', `OBSIDIAN_API_KEY=${OBSIDIAN_API_KEY}`);
+    args.push('-e', `OBSIDIAN_HOST_URL=https://${CONTAINER_HOST_GATEWAY}:27124`);
   }
 
   // Runtime-specific args for host gateway resolution

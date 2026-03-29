@@ -73,6 +73,16 @@ Standard Markdown: `**bold**`, `*italic*`, `[links](url)`, `# headings`.
 
 ---
 
+## Knowledge Base (Obsidian)
+
+You have access to an Obsidian vault for long-term knowledge and project management via the `mcp__obsidian-mcp-server__*` tools.
+
+The vault schema, conventions, and tool reference are defined in the shared project management schema — read it at:
+
+`/workspace/project/docs/project-management.md`
+
+---
+
 ## Admin Context
 
 This is the **main channel**, which has elevated privileges.

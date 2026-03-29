@@ -450,6 +450,7 @@ async function runQuery(
         'mcp__nanoclaw__*',
         'mcp__gmail__*',
         'mcp__google-calendar__*',
+        'mcp__obsidian-mcp-server__*',
       ],
       env: sdkEnv,
       permissionMode: 'bypassPermissions',
@@ -476,6 +477,18 @@ async function runQuery(
             GOOGLE_OAUTH_CREDENTIALS: '/home/node/.gmail-mcp/gcp-oauth.keys.json',
           },
         },
+        ...(process.env.OBSIDIAN_API_KEY ? {
+          'obsidian-mcp-server': {
+            command: 'npx',
+            args: ['-y', 'obsidian-mcp-server'],
+            env: {
+              OBSIDIAN_API_KEY: process.env.OBSIDIAN_API_KEY,
+              OBSIDIAN_BASE_URL: process.env.OBSIDIAN_HOST_URL || 'https://host.docker.internal:27124',
+              OBSIDIAN_VERIFY_SSL: 'false',
+              OBSIDIAN_ENABLE_CACHE: 'true',
+            },
+          },
+        } : {}),
       },
       hooks: {
         PreCompact: [{ hooks: [createPreCompactHook(containerInput.assistantName)] }],

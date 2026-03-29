@@ -442,9 +442,9 @@ export async function processTaskIpc(
           );
           break;
         }
-        // Defense in depth: agent cannot set isMain via IPC.                                                                                                                                    
-        // Preserve isMain from the existing registration so IPC config                                                                                                                          
-        // updates (e.g. adding additionalMounts) don't strip the flag.                                                                                                                          
+        // Defense in depth: agent cannot set isMain via IPC.
+        // Preserve isMain from the existing registration so IPC config
+        // updates (e.g. adding additionalMounts) don't strip the flag.
         const existingGroup = registeredGroups[data.jid];
         deps.registerGroup(data.jid, {
           name: data.name,
@@ -464,7 +464,12 @@ export async function processTaskIpc(
       break;
 
     default: {
-      const handled = await handleXIpc(data as Record<string, unknown>, sourceGroup, isMain, DATA_DIR);
+      const handled = await handleXIpc(
+        data as Record<string, unknown>,
+        sourceGroup,
+        isMain,
+        DATA_DIR,
+      );
       if (!handled) {
         logger.warn({ type: data.type }, 'Unknown IPC task type');
       }
