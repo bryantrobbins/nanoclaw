@@ -266,7 +266,10 @@ function buildContainerArgs(
   // Obsidian MCP server — pass API key and host URL if configured
   if (OBSIDIAN_API_KEY) {
     args.push('-e', `OBSIDIAN_API_KEY=${OBSIDIAN_API_KEY}`);
-    args.push('-e', `OBSIDIAN_HOST_URL=https://${CONTAINER_HOST_GATEWAY}:27124`);
+    args.push(
+      '-e',
+      `OBSIDIAN_HOST_URL=https://${CONTAINER_HOST_GATEWAY}:27124`,
+    );
   }
 
   // Runtime-specific args for host gateway resolution
